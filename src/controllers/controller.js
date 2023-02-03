@@ -12,6 +12,12 @@ const save = async (req, res) => {
   res.status(200).json(allCompanyData);
 };
 
+const getSectors = async (req, res) => 
+{
+  const sectorData = service.addSectorDetails();
+  res.status(200).json(sectorData);
+};
+
 
 const getAllCompanies = async (req, res) => {
   const allCompanies = await db.companies.findAll();
@@ -22,4 +28,5 @@ const getAllCompanies = async (req, res) => {
 module.exports = {
   save,
   getAllCompanies,
+  getSectors
 };

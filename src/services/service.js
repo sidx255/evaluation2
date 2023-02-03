@@ -1,7 +1,5 @@
 
-
-
-const { getCsvFileJson, getCompanyData } = require("../utils/extAPI");
+const { getCsvFileJson, getCompanyData, getSectorData } = require("../utils/extAPI");
 const db = require("../models");
 
 const getCsvData = async (urlLink) => {
@@ -22,7 +20,23 @@ const addCompanyData = async (companyData) => {
   return data;
 };
 
+const addSectorDetails = async () => {
+  const fetchedCompanyData = await getSectorData();
+  const newSectorData = fetchedCompanyData.map(sector => {
+    return {
+      companyId: sector.companyId,
+      score: (((sector.performanceIndex[0].value * 10) + 
+      (sector.performanceIndex[1].value / 10000) + 
+      (sector.performanceIndex[2].value * 10) + 
+      sector.performanceIndex[3].value) / 4)
+    };
+  });
+  const data = await db.sectors.bulkCreate(newSectorData);
+  return data;
+};
+
 module.exports = {
   getCsvData,
   addCompanyData,
+  addSectorDetails
 };

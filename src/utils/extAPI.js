@@ -20,7 +20,26 @@ const getCompanyData = async (companyId) => {
   return companyData.data;
 };
 
+// const getSectorData = async (sectorName) => {
+//   const sectorData = await axios({
+//     method: "GET",
+//     url: `http://54.167.46.10/sector?name=${sectorName}`
+//   });
+//   console.log(sectorData.data);
+//   return sectorData.data;
+// };
+
+const getSectorData = async () => {
+  const sectorData = await axios({
+    method: "GET",
+    url: "http://54.167.46.10/sector?name=Software"
+  });
+  console.log(sectorData.data);
+  return sectorData.data;
+};
+
 module.exports = {
   getCsvFileJson,
-  getCompanyData
+  getCompanyData,
+  getSectorData
 };
