@@ -35,8 +35,15 @@ const addSectorDetails = async () => {
   return data;
 };
 
+const getBoth = async()=>{
+  return await db.sectors.findAll({
+    include:db.companies
+  });
+};
+
 module.exports = {
   getCsvData,
   addCompanyData,
-  addSectorDetails
+  addSectorDetails,
+  getBoth
 };

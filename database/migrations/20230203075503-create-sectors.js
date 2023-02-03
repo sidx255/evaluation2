@@ -6,10 +6,10 @@ module.exports = {
       id: {
         allowNull: false,
         autoIncrement: true,
-        primaryKey: true,
         type: Sequelize.INTEGER
       },
       companyId: {
+        primaryKey: true,
         type: Sequelize.STRING
       },
       score: {

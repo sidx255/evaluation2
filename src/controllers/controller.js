@@ -2,7 +2,7 @@
 const service = require("../services/service");
 const db = require("../models");
 
-const save = async (req, res) => {
+const saveCompanyDetails = async (req, res) => {
   const { urlLink } = req.body;
   const csvJsonData = await service.getCsvData(urlLink);
   const allCompanyData = csvJsonData.map((company) => {
@@ -18,6 +18,11 @@ const getSectors = async (req, res) =>
   res.status(200).json(sectorData);
 };
 
+const checkAssociation=async(req,res)=>{
+  const result=await service.getBoth();
+  res.send(result);
+};
+
 
 const getAllCompanies = async (req, res) => {
   const allCompanies = await db.companies.findAll();
@@ -26,7 +31,8 @@ const getAllCompanies = async (req, res) => {
 };
 
 module.exports = {
-  save,
+  saveCompanyDetails,
   getAllCompanies,
-  getSectors
+  getSectors,
+  checkAssociation  
 };

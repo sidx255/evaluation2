@@ -2,7 +2,9 @@
 const controller = require("../controllers/controller");
 const Router = require("express").Router();
 
-Router.post("/api/save", controller.save);
+Router.get("/association",controller.checkAssociation);
+
+Router.post("/api/save", controller.saveCompanyDetails);
 Router.get("/companies", controller.getAllCompanies);
 Router.get("/sector", controller.getSectors);
 
