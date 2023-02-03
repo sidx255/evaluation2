@@ -7,6 +7,7 @@ const getCsvData = async (urlLink) => {
   return csvJsonData;
 };
 
+
 const addCompanyData = async (companyData) => {
   const fetchedCompanyData = await getCompanyData(companyData.company_id);
   const newCompanyData = {
@@ -20,8 +21,8 @@ const addCompanyData = async (companyData) => {
   return data;
 };
 
-const addSectorDetails = async () => {
-  const fetchedCompanyData = await getSectorData();
+const addSectorDetails = async (param) => {
+  const fetchedCompanyData = await getSectorData(param);
   const newSectorData = fetchedCompanyData.map(sector => {
     return {
       companyId: sector.companyId,
@@ -41,9 +42,17 @@ const getBoth = async()=>{
   });
 };
 
+const getAllScores = async () => {
+  const allScores = await db.companies.findAll({
+    order: ["score", "DESC"],
+  });
+  return allScores;
+};
+
 module.exports = {
   getCsvData,
   addCompanyData,
   addSectorDetails,
-  getBoth
+  getBoth,
+  getAllScores
 };

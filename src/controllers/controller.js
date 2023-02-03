@@ -14,13 +14,23 @@ const saveCompanyDetails = async (req, res) => {
 
 const getSectors = async (req, res) => 
 {
-  const sectorData = service.addSectorDetails();
+  const sectorData = service.addSectorDetails(req.query.params);
   res.status(200).json(sectorData);
 };
 
 const checkAssociation=async(req,res)=>{
   const result=await service.getBoth();
   res.send(result);
+};
+
+const getAllScores = async (req, res) => {
+  const allScores = await service.getAllScores();
+  res.status(200).json(allScores);
+};
+
+const getCompanyScoresInSector = async (req, res) => {
+  const companyScores = await service.getCompanyScoresInSector(req.query.Sector);
+  res.status(200).json(companyScores);
 };
 
 
@@ -34,5 +44,7 @@ module.exports = {
   saveCompanyDetails,
   getAllCompanies,
   getSectors,
-  checkAssociation  
+  checkAssociation,
+  getAllScores,
+  getCompanyScoresInSector
 };

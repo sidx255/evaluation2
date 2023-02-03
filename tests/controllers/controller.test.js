@@ -1,13 +1,13 @@
 
-const todo = require("../../src/services/service");
-const controller = require("../../src/controllers/controller");
+const service = require("../../src/services/service");
+const controller = require("../../src/controllers/controller.js");
 
 describe("To-Do app utilities", () =>
   describe("Create a user", () => {
-    it("should list all tasks", async () => {
-      jest.spyOn(todo, "getTasks").mockResolvedValue({ id: 1 });
+    it("should list all companies", async () => {
+      jest.spyOn(service, "getAllCompanies").mockResolvedValue({ id: 1 });
       const mockRes = { send: jest.fn() };
-      await controller.getTasks({
+      await controller.getAllCompanies({
         body: {
           id: 12,
           isComplete: false,
@@ -18,3 +18,4 @@ describe("To-Do app utilities", () =>
     });
   })
 );
+
