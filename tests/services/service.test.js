@@ -1,33 +1,25 @@
 
 
 
-const services = require("../../src/services");
-const controller = require("../../src/controllers");
-const db = require("../../datnpabase/models");
+const services = require("/../../src/services");
+const controller = require("/../../src/controllers");
+const db = require("/../../database/models");
 
 describe("Testing Model: companies", () => {
   it("should return all companies", async () => {
     jest.spyOn(db.companies, "findAll").mockResolvedValue([{
-      id: 1,
-      title: "companies1",
-      isCompleted: false
+      companyId: 1
     },
     {
-      id: 2,
-      title: "companies2",
-      isCompleted: false
+      companyId: 2
     }]);
       
     const result  = await services.getAllCompanies();
     expect(result).toEqual([{
-      id: 1,
-      title: "companies1",
-      isCompleted: false
+      companyId: 1
     },
     {
-      id: 2,
-      title: "companies2",
-      isCompleted: false
+      companyId: 2
     }]);
   });
 });

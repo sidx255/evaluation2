@@ -7,15 +7,13 @@ describe("To-Do app utilities", () =>
     it("should list all companies", async () => {
       jest.spyOn(service, "getAllCompanies").mockResolvedValue({ id: 1 });
       const mockRes = { send: jest.fn() };
-      await controller.getAllCompanies({
-        body: {
-          id: 12,
-          isComplete: false,
-          name: "test"
+      await controller.getAllCompanies({  
+        query: {
+          companyId: 1,
         },
+
       }, mockRes);
       expect(mockRes.send).toBeCalledWith({ id: 1 });
     });
   })
 );
-
