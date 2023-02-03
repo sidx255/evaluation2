@@ -1,0 +1,91 @@
+{
+	"info": {
+		"_postman_id": "c0dabefc-5835-4a71-966a-28efebf15015",
+		"name": "Evaluation-2",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "19476344"
+	},
+	"item": [
+		{
+			"name": "POST: SAVE company details",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    urlLink: \"https://store-0001.s3.amazonaws.com/input.csv\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/save",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"save"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET: ALL companies details",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/companies",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"companies"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET: SAVE all sectors",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/sector",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"sector"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "TASK 1: GET: ALL Associations",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/association",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"association"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
