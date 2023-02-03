@@ -1,6 +1,4 @@
 
-
-
 const services = require("/../../src/services");
 const controller = require("/../../src/controllers");
 const db = require("/../../database/models");
