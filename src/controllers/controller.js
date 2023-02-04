@@ -1,43 +1,120 @@
 
 const service = require("../services/service");
 const db = require("../models");
+const HTTPError = require("../utils/httpError");
 
 const saveCompanyDetails = async (req, res) => {
-  const { urlLink } = req.body;
-  const csvJsonData = await service.getCsvData(urlLink);
-  const allCompanyData = csvJsonData.map((company) => {
-    const companyData = service.addCompanyData(company);
-    return companyData;
-  });
-  res.status(200).json(allCompanyData);
+  try {
+    const { urlLink } = req.body;
+    const csvJsonData = await service.getCsvData(urlLink);
+    const allCompanyData = csvJsonData.map((company) => {
+      const companyData = service.addCompanyData(company);
+      return companyData;
+    });
+    res.status(200).json(allCompanyData);
+  } catch (err) {
+    if (err instanceof HTTPError) {
+      res.status(err.statusCode).json({
+        message: err.message,
+      });
+    } else {
+      res.status(500).json({
+        message: "Something went wrong",
+      });
+    }
+  }
 };
 
 const getSectors = async (req, res) => 
 {
-  const sectorData = service.addSectorDetails(req.query.params);
-  res.status(200).json(sectorData);
+  try{
+    const sectorData = service.addSectorDetails(req.query.params);
+    res.status(200).json(sectorData);
+  } catch (err) {
+    if (err instanceof HTTPError) {
+      res.status(err.statusCode).json({
+        message: err.message,
+      });
+    } else {
+      res.status(500).json({
+        message: "Something went wrong",
+      });
+    }
+  }
 };
 
 const checkAssociation=async(req,res)=>{
-  const result=await service.getBoth();
-  res.send(result);
+  try{
+    const result=await service.getBoth();
+    res.send(result);
+  }
+  catch (err) {
+    if (err instanceof HTTPError) {
+      res.status(err.statusCode).json({
+        message: err.message,
+      });
+    } else {
+      res.status(500).json({
+        message: "Something went wrong",
+      });
+    }
+  }
 };
 
 const getAllScores = async (req, res) => {
-  const allScores = await service.getAllScores();
-  res.status(200).json(allScores);
-};
+  try {
 
-const getCompanyScoresInSector = async (req, res) => {
-  const companyScores = await service.getCompanyScoresInSector(req.query.Sector);
-  res.status(200).json(companyScores);
-};
+    const allScores = await service.getAllScores();
+    res.status(200).json(allScores);
 
+  } catch (err) {
+    if (err instanceof HTTPError) {
+      res.status(err.statusCode).json({
+        message: err.message,
+      });
+    } else {
+      res.status(500).json({
+        message: "Something went wrong",
+      });
+    }
+  }
+};
 
 const getAllCompanies = async (req, res) => {
-  const allCompanies = await db.companies.findAll();
-  // return allCompanies;
-  res.status(200).json(allCompanies);
+  try {
+    const allCompanies = await db.companies.findAll();
+    // return allCompanies;
+    res.status(200).json(allCompanies);
+  } catch (err) {
+    if (err instanceof HTTPError) {
+      res.status(err.statusCode).json({
+        message: err.message,
+      });
+    } else {
+      res.status(500).json({
+        message: "Something went wrong",
+      });
+    }
+  }
+};
+
+const updateCEO = async (req, res) => {
+  try {
+    await service.updateCEO(req.params.id, req.body.ceo);
+    res.status(200).json({
+      message: "CEO updated successfully",
+    });
+  } catch (err) {
+    if (err instanceof HTTPError) {
+      res.status(err.statusCode).json({
+        message: err.message,
+      });
+    } else {
+      res.status(500).json({
+        message: "Something went wrong",
+      });
+    }
+  }
 };
 
 module.exports = {
@@ -46,5 +123,5 @@ module.exports = {
   getSectors,
   checkAssociation,
   getAllScores,
-  getCompanyScoresInSector
+  updateCEO
 };

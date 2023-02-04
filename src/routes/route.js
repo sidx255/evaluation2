@@ -6,6 +6,7 @@ Router.get("/association",controller.checkAssociation);
 
 Router.post("/api/save", controller.saveCompanyDetails);
 Router.get("/companies", controller.getAllCompanies);
+Router.patch("/companies/:id", controller.updateCEO);
 Router.get("/sector", controller.getSectors);
 
 // router.post('/api/save', companyControllers.fetchCompanyDataAndStore);

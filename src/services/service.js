@@ -49,10 +49,22 @@ const getAllScores = async () => {
   return allScores;
 };
 
+const updateCEO = async (companyId, ceoName) => {
+  const companyData = await db.companies.update({
+    ceo: ceoName,
+  }, {
+    where: {
+      companyId: companyId,
+    }
+  });
+  return companyData;
+};
+
 module.exports = {
   getCsvData,
   addCompanyData,
   addSectorDetails,
   getBoth,
-  getAllScores
+  getAllScores,
+  updateCEO
 };
