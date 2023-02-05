@@ -29,10 +29,10 @@ const getCompanyData = async (companyId) => {
 //   return sectorData.data;
 // };
 
-const getSectorData = async (SectorName) => {
+const getSectorData = async () => {
   const sectorData = await axios({
     method: "GET",
-    url: "http://54.167.46.10/sector?name=${SectorName}"
+    url: "http://54.167.46.10/sector?name=Sofware"
   });
   console.log(sectorData.data);
   return sectorData.data;

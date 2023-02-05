@@ -86,6 +86,54 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "TASK 2: GET: Ranks of companies",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/rank",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"rank"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "TASK 3: PATCH: Update CEO",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"ceo\": \"SiddharthSharma\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/companies/46e1d061-e39d-4d5c-8e0e-3fa5d45d9efc",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"companies",
+						"46e1d061-e39d-4d5c-8e0e-3fa5d45d9efc"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }

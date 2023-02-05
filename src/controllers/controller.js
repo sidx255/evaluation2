@@ -1,7 +1,7 @@
 
 const service = require("../services/service");
 const db = require("../models");
-const HTTPError = require("../utils/httpError");
+const HTTPError = require("../utils/HTTPError");
 
 const saveCompanyDetails = async (req, res) => {
   try {
@@ -117,11 +117,21 @@ const updateCEO = async (req, res) => {
   }
 };
 
+const getTopCompanies=async (req,res)=>{
+  const topCompanies = await service.getTopCompanies();
+  //const topCompanies = await service.getTopCompanies(req.query.sector);
+  const topRankedCompanies = topCompanies.map((item,i)=>{
+    return {"id":item.companyId,"name":item.companies[0].companyName,"ceo":item.companies[0].ceoName,"score":item.companies[0].score,"ranking":i+1};
+  });
+  res.status(200).json({data:topRankedCompanies});
+};
+
 module.exports = {
   saveCompanyDetails,
   getAllCompanies,
   getSectors,
   checkAssociation,
   getAllScores,
-  updateCEO
+  updateCEO,
+  getTopCompanies
 };

@@ -8,6 +8,7 @@ Router.post("/api/save", controller.saveCompanyDetails);
 Router.get("/companies", controller.getAllCompanies);
 Router.patch("/companies/:id", controller.updateCEO);
 Router.get("/sector", controller.getSectors);
+Router.get("/rank", controller.getTopCompanies);
 
 // router.post('/api/save', companyControllers.fetchCompanyDataAndStore);
 // router.get('/companies', companyControllers.getAllCompanies);

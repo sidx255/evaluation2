@@ -60,11 +60,24 @@ const updateCEO = async (companyId, ceoName) => {
   return companyData;
 };
 
+const getTopCompanies = async () => {
+  const result = await db.sectors.findAll({
+    include: db.companies,
+      
+  });
+  return result.sort((element1,element2)=>{
+    if(element1.companies[0].score>element2.companies[0].score){
+      return -1;
+    }
+  });
+};
+
 module.exports = {
   getCsvData,
   addCompanyData,
   addSectorDetails,
   getBoth,
   getAllScores,
-  updateCEO
+  updateCEO,
+  getTopCompanies
 };
