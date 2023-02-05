@@ -45,7 +45,10 @@ const getSectors = async (req, res) =>
 
 const checkAssociation=async(req,res)=>{
   try{
-    const result=await service.getBoth();
+    const associations=await service.getBoth();
+    const result = associations.map((item)=>{
+      return {"id":item.companyId,"name":item.companies[0].name,"score":item.score};
+    });
     res.send(result);
   }
   catch (err) {
@@ -118,12 +121,25 @@ const updateCEO = async (req, res) => {
 };
 
 const getTopCompanies=async (req,res)=>{
-  const topCompanies = await service.getTopCompanies();
-  //const topCompanies = await service.getTopCompanies(req.query.sector);
-  const topRankedCompanies = topCompanies.map((item,i)=>{
-    return {"id":item.companyId,"name":item.companies[0].companyName,"ceo":item.companies[0].ceoName,"score":item.companies[0].score,"ranking":i+1};
-  });
-  res.status(200).json({data:topRankedCompanies});
+  try {
+
+    //const topCompanies = await service.getTopCompanies();
+    const topCompanies = await service.getTopCompanies(req.query.sector);
+    const topRankedCompanies = topCompanies.map((item,i)=>{
+      return {"id":item.companyId,"name":item.companies[0].name,"ceo":item.companies[0].ceo,"score":item.score,"ranking":i+1};
+    });
+    res.status(200).json({data:topRankedCompanies});
+  } catch (err) {
+    if (err instanceof HTTPError) {
+      res.status(err.statusCode).json({
+        message: err.message,
+      });
+    } else {
+      res.status(500).json({
+        message: "Something went wrong",
+      });
+    }
+  }
 };
 
 module.exports = {

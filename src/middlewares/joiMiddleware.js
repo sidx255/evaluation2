@@ -1,30 +1,20 @@
 
-const HTTPError = require("../utils/HTTPError");
-const {postSchema,patchSchema}=require("./schema");
+const HTTPError = require("../../src/utils/HTTPError");
+const {patchSchema}=require("./schema");
 
-exports.validatePost=(req,res,next)=>{
-  try {
-    const{error,value}=postSchema.validate({title:req.body.title});
-    if (error) {
-      throw new HTTPError(error.message, 400);
+exports.validatePatch=(req,res,next)=>{
+  try{
+    const{error,value}=patchSchema.validate({ceo:req.body.ceo, companyId:req.params.id});
+    if(error){
+      res.json({error:error.message});
     }
     else{
       next();
     }
-  } catch (error) {
+  }  catch (error) {
     if (error instanceof HTTPError) {
       res.status(error.code).json({ message: error.message });
     }
     res.status(400).json(error.toString());
-  }
-};
-exports.validatePatch=(req,res,next)=>{
-
-  const{error,value}=patchSchema.validate({title:req.body.title,isCompleted:req.body.isCompleted,id:req.params.id});
-  if(error){
-    res.json({error:error.message});
-  }
-  else{
-    next();
   }
 };
