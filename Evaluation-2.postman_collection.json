@@ -69,7 +69,26 @@
 			"response": []
 		},
 		{
-			"name": "TASK 1: GET: ALL Associations",
+			"name": "GET: All Associations",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/association",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"association"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "TASK 1: GET: Scores of companies",
 			"request": {
 				"method": "GET",
 				"header": [],
