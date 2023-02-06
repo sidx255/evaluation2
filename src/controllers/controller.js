@@ -28,7 +28,8 @@ const saveCompanyDetails = async (req, res) => {
 const getSectors = async (req, res) => 
 {
   try{
-    const sectorData = service.addSectorDetails(req.query.params);
+    // console.log(req.query.params);
+    const sectorData = await service.addSectorDetails(req.query.name);
     res.status(200).json(sectorData);
   } catch (err) {
     if (err instanceof HTTPError) {
@@ -37,7 +38,7 @@ const getSectors = async (req, res) =>
       });
     } else {
       res.status(500).json({
-        message: "Something went wrong",
+        message: err.message,
       });
     }
   }

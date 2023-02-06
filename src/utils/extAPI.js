@@ -16,7 +16,7 @@ const getCompanyData = async (companyId) => {
     method: "GET",
     url: `http://54.167.46.10/company/${companyId}`
   });
-  console.log(companyData.data);
+  // console.log(companyData.data);
   return companyData.data;
 };
 
@@ -34,7 +34,7 @@ const getSectorData = async (SectorName) => {
     method: "GET",
     url: `http://54.167.46.10/sector?name=${SectorName}`
   });
-  console.log(sectorData.data);
+  //console.log(sectorData.data);
   return sectorData.data;
 };
 

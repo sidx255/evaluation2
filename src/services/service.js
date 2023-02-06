@@ -22,6 +22,7 @@ const addCompanyData = async (companyData) => {
 };
 
 const addSectorDetails = async (param) => {
+  //console.log("PASRAM", param);
   const fetchedCompanyData = await getSectorData(param);
   const newSectorData = fetchedCompanyData.map(sector => {
     return {
